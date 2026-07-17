@@ -11,8 +11,8 @@ public sealed partial class Boot : MonoBehaviour
     /// <summary>
     /// 游戏模式
     /// </summary>
-    [SerializeField] private E_GAME_MODE EGameMode;
-    private Configure ModeConfigure => ModeConfigures[EGameMode];
+    [SerializeField] private E_GAME_MODE GameMode;
+    private Configure ModeConfigure => ModeConfigures[GameMode];
     
     /// <summary>
     /// 资源系统运行模式
@@ -21,7 +21,7 @@ public sealed partial class Boot : MonoBehaviour
     
     private void Awake()
     {
-        Debug.Log($"游戏运行模式：{ EGameMode }模式资源系统运行模式：{ PlayMode }");
+        Debug.Log($"游戏运行模式：{ GameMode }模式资源系统运行模式：{ PlayMode }");
         Application.targetFrameRate = 60;
         Application.runInBackground = true;
     }
