@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
@@ -10,21 +9,44 @@ public class PooledUnit
     {
         void IReusable.Release()
         {
-            Debug.Log("清空集合");
             Clear();
         }
     }
     
-    
     [Test]
-    public void Foo()
+    public void PooledFoo()
     {
-        using (var exlist = Pooled<ExList<int>>.Get())
+        using (var pExlist = Pooled<ExList<int>>.Get())
         {
-            ExList<int> list = exlist;
-            list.Add(1);
+            ExList<int> exList = pExlist;
+            exList.Add(1);
+            Debug.Assert(exList.Count == 1);
         }
-        Debug.Log("Done");
+        using (var pExlist = Pooled<ExList<int>>.Get())
+        {
+            ExList<int> exList = pExlist;
+            Debug.Assert(exList.Count == 0);            
+        }
+    }
+
+    [Test]
+    public void PooledListFoo()
+    {
+        using (var pList = PooledList<int>.Get())
+        {
+            pList.Add(2);
+            Debug.Assert(pList.Count == 1);
+        }
+        using (var pList = PooledList<int>.Get())
+        {
+            Debug.Assert(pList.Count == 0);
+        }
+        
+        using (var pList = PooledList<long>.Get())
+        {
+            pList.Add(2);
+            Debug.Assert(pList.Count == 1);
+        }
     }
 }
 

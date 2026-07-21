@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -30,7 +29,7 @@ public class MonitoredObjectPoolMemoryWindow: EditorWindow
 #if !POOLED_EXCEPTION
         EditorGUILayout.LabelField("请开启 POOLED_EXCEPTION");
 #else
-        Dictionary<string, Dictionary<Type, HashSet<MonitoredObjectPool.IMonitoredPool>>> poolGroupDict = MonitoredObjectPool.Pools;
+        Dictionary<string, Dictionary<System.Type, HashSet<MonitoredObjectPool.IMonitoredPool>>> poolGroupDict = MonitoredObjectPool.Pools;
         if (poolGroupDict == null) return;
         scroll = EditorGUILayout.BeginScrollView(scroll);
         using (new EditorGUILayout.HorizontalScope())
@@ -38,27 +37,34 @@ public class MonitoredObjectPoolMemoryWindow: EditorWindow
             EditorGUILayout.LabelField("ClassName");
             EditorGUILayout.LabelField("CountActive\tCountInactive\tCountAll");
         }
-        foreach (var group in poolGroupDict)
+        foreach (var groupPair in poolGroupDict)
         {
             using (new EditorGUILayout.VerticalScope("framebox"))
             {
-                foldoutDict[group.Key] = EditorGUILayout.Foldout(foldoutDict.GetValueOrDefault(group.Key, true), group.Key);
-                if (foldoutDict[group.Key])
+                using (new EditorGUILayout.HorizontalScope())
+                {
+                    foldoutDict[groupPair.Key] = EditorGUILayout.Foldout(foldoutDict.GetValueOrDefault(groupPair.Key, true), groupPair.Key);
+                }
+                if (foldoutDict.ContainsKey(groupPair.Key))
                 {
                     using (new EditorGUILayout.VerticalScope())
                     {
-                        foreach (var pools in group.Value)
+                        foreach (var poolsPair in groupPair.Value)
                         {
-                            foreach (var pool in pools.Value)
+                            foreach (var poolPair in poolsPair.Value)
                             {
                                 using (new EditorGUILayout.HorizontalScope())
                                 {
-                                    EditorGUILayout.LabelField(pools.Key.ToString());
-                                    EditorGUILayout.LabelField($"{pool.CountActive,11}\t{pool.CountInactive,11+2+13}\t{pool.CountAll,13+2+8}");
+                                    EditorGUILayout.LabelField(poolsPair.Key.ToString());
+                                    EditorGUILayout.LabelField($"{poolPair.CountActive,11}\t{poolPair.CountInactive,11+2+13}\t{poolPair.CountAll,13+2+8}");
+                                    if (GUILayout.Button("Clear"))
+                                    {
+                                        poolPair.Clear();
+                                    }
                                 }
                             }
                         }
-                    }  
+                    }
                 }
             }
         }

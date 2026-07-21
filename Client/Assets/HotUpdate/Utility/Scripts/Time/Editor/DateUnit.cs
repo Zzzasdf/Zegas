@@ -5,10 +5,18 @@ using UnityEngine;
 public class DateUnit : MonoBehaviour
 {
     [Test]
-    public void Foo()
+    public void DateUnitFoo()
     {
-        Debug.Log(SystemTime.CurrentUnixTimeMilliseconds());
-        string dateFormat = DateFormat.GetDateFormat(DateFormat.EDateFormat.ELEC_YearMonthDay_HourMinuteSecond, SystemTime.CurrentUnixTimeMilliseconds());
-        Debug.Log(dateFormat);
+        long millSeconds = SystemTime.CurrentUnixTimeMilliseconds();
+        
+        Log(DateFormat.EDateFormat.ELEC_YearMonthDay_HourMinuteSecond, millSeconds);
+        
+        Log(DateFormat.EDateFormat.CN_YearMonthDay_HourMinuteSecond, millSeconds);
+    }
+    
+    private void Log(DateFormat.EDateFormat eDateFormat, long millSeconds)
+    {
+        string timeFormat = DateFormat.GetDateFormat(eDateFormat, millSeconds);
+        Debug.Log(timeFormat);
     }
 }

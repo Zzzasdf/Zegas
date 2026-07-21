@@ -5,9 +5,20 @@ using UnityEngine;
 public class TimeUnit : MonoBehaviour
 {
     [Test]
-    public void Foo()
+    public void TimeUnitFoo()
     {
-        string timeFormat = TimeFormat.GetTimeFormat(TimeFormat.ETimeFormat.ELEC_HourMinuteSecond, (24 * 60 * 60 + 5 * 60 + 30) * 1000);
+        long millSeconds = SystemTime.CurrentUnixTimeMilliseconds();
+        
+        Log(TimeFormat.ETimeFormat.ELEC_DayHourMinuteSecond, millSeconds);
+        Log(TimeFormat.ETimeFormat.ELEC_HourMinuteSecond, millSeconds);
+        
+        Log(TimeFormat.ETimeFormat.CN_DayHourMinuteSecond, millSeconds);
+        Log(TimeFormat.ETimeFormat.CN_HourMinuteSecond, millSeconds);
+    }
+
+    private void Log(TimeFormat.ETimeFormat eTimeFormat, long millSeconds)
+    {
+        string timeFormat = TimeFormat.GetTimeFormat(eTimeFormat, millSeconds);
         Debug.Log(timeFormat);
     }
 }

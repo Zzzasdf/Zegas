@@ -59,9 +59,10 @@ public class MonitoredObjectPool
             UnityEngine.Debug.LogError($"pool item gc eg!! {typeof(TItem)} => 当前对象被销毁，代码中存在未回收该类型的地方");
         }
         
-        public int CountAll => s_Pool.CountAll;
-        public int CountActive => s_Pool.CountActive;
-        public int CountInactive => s_Pool.CountInactive;
+        int IMonitoredPool.CountAll => s_Pool.CountAll;
+        int IMonitoredPool.CountActive => s_Pool.CountActive;
+        int IMonitoredPool.CountInactive => s_Pool.CountInactive;
+        void IMonitoredPool.Clear() => s_Pool.Clear();
     }
 
     public interface IMonitoredPool 
@@ -69,6 +70,7 @@ public class MonitoredObjectPool
         int CountAll { get; }
         int CountActive { get; }
         int CountInactive { get; }
+        void Clear();
     }
 }
 #else
