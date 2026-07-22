@@ -9,6 +9,7 @@ public sealed class Pooled<T> : IDisposable
     where T : class, IReusable, new()
 {
     private T _value;
+    public T Value => _value;
     
     private static readonly MonitoredObjectPool.ObjectPool<Pooled<T>, T> s_Pool = 
         new("Pooled", () => new Pooled<T>(), 

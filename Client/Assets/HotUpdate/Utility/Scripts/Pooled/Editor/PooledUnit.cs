@@ -1,6 +1,9 @@
+using System;
+using System.Buffers;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.Pool;
 
 [TestFixture]
 public class PooledUnit
@@ -47,6 +50,21 @@ public class PooledUnit
             pList.Add(2);
             Debug.Assert(pList.Count == 1);
         }
+    }
+
+    [Test]
+    public void PooledBitArray()
+    {
+        // ArrayPool<int>.Shared.Rent(5);
+        // ArrayPool<int>.Shared.Return();
+        // Span<T>
+        var l = MemoryPool<int>.Shared;
+            var d = l.Rent(5);
+            ReadOnlySpan<char> chars = null;
+            for (int i = 0; i < chars.Length; i++)
+            {
+                var char1 = chars[i];
+            }
     }
 }
 

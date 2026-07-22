@@ -64,6 +64,14 @@ public sealed class PooledCharArray : IDisposable
         _size++;
         return this;
     }
+    public PooledCharArray AddRange(ReadOnlySpan<char> spanC)
+    {
+        for (int i = 0; i < spanC.Length; i++)
+        {
+            Add(spanC[i]);
+        }
+        return this;
+    }
 
     public void SetText(in TMP_Text tmpText)
     {

@@ -4,7 +4,7 @@ using TMPro;
 public class DateFormat
 {
      /// 显示格式
-    public enum EDateFormat
+    public enum EFormat
     {
         /// 电子格式 0000-00-00 00:00:00
         ELEC_YearMonthDay_HourMinuteSecond = 10001,
@@ -13,38 +13,92 @@ public class DateFormat
         CN_YearMonthDay_HourMinuteSecond = 20001,
     }
 
-    public static void SetTMPDateFormat(in TMP_Text tmpText, EDateFormat eDateFormat, long ticks)
+#region TMP_Text
+    public static void SetTMP(in TMP_Text tmpText, EFormat eFormat, long millSeconds, 
+        string? prefixStr, string? suffixStr)
     {
         using (PooledCharArray pooledCharArray = PooledCharArray.Get())
         {
-            SetDateFormat(pooledCharArray, eDateFormat, ticks);
+            Set(pooledCharArray, eFormat, millSeconds, prefixStr, suffixStr);
             pooledCharArray.SetText(tmpText);
         }
     }
-
-    public static string GetDateFormat(EDateFormat eDateFormat, long ticks)
+    public static void SetTMP(in TMP_Text tmpText, EFormat eFormat, long millSeconds, 
+        ReadOnlySpan<char> prefixChars, ReadOnlySpan<char> suffixChars)
     {
         using (PooledCharArray pooledCharArray = PooledCharArray.Get())
         {
-            SetDateFormat(pooledCharArray, eDateFormat, ticks);
+            Set(pooledCharArray, eFormat, millSeconds, prefixChars, suffixChars);
+            pooledCharArray.SetText(tmpText);
+        }
+    }
+    public static void SetTMP(in TMP_Text tmpText, EFormat eFormat, long millSeconds)
+    {
+        using (PooledCharArray pooledCharArray = PooledCharArray.Get())
+        {
+            Set(pooledCharArray, eFormat, millSeconds);
+            pooledCharArray.SetText(tmpText);
+        }
+    }
+#endregion
+
+#region Get
+    public static string Get(EFormat eFormat, long millSeconds, 
+        string? prefixStr, string? suffixStr)
+    {
+        using (PooledCharArray pooledCharArray = PooledCharArray.Get())
+        {
+            Set(pooledCharArray, eFormat, millSeconds, prefixStr, suffixStr);
             return pooledCharArray.ToString();
         }
     }
+    public static string Get(EFormat eFormat, long millSeconds, 
+        ReadOnlySpan<char> prefixChars, ReadOnlySpan<char> suffixChars)
+    {
+        using (PooledCharArray pooledCharArray = PooledCharArray.Get())
+        {
+            Set(pooledCharArray, eFormat, millSeconds, prefixChars, suffixChars);
+            return pooledCharArray.ToString();
+        }
+    }
+    public static string Get(EFormat eFormat, long millSeconds)
+    {
+        using (PooledCharArray pooledCharArray = PooledCharArray.Get())
+        {
+            Set(pooledCharArray, eFormat, millSeconds);
+            return pooledCharArray.ToString();
+        }
+    }
+#endregion
     
-    /// 设置显示字符数组
-    private static void SetDateFormat(in PooledCharArray pooledCharArray, EDateFormat EDateFormat, long millSeconds)
+#region Set
+    public static void Set(in PooledCharArray pooledCharArray, EFormat eFormat, long millSeconds,
+        string? prefixStr, string? suffixStr)
+    {
+        ReadOnlySpan<char> prefixChars = prefixStr.AsSpan();
+        ReadOnlySpan<char> suffixChars = suffixStr.AsSpan();
+        Set(pooledCharArray, eFormat, millSeconds, prefixChars, suffixChars);
+    }
+    public static void Set(in PooledCharArray pooledCharArray, EFormat eFormat, long millSeconds,
+        ReadOnlySpan<char> prefixChars, ReadOnlySpan<char> suffixChars)
+    {
+        pooledCharArray.AddRange(prefixChars);
+        Set(pooledCharArray, eFormat, millSeconds);
+        pooledCharArray.AddRange(suffixChars);
+    }
+    public static void Set(in PooledCharArray pooledCharArray, EFormat eFormat, long millSeconds)
     {
         DateTime date = SystemTime.GetDateTimeFromUnixMilliseconds(millSeconds);
-        switch (EDateFormat)
+        switch (eFormat)
         {
-            case EDateFormat.ELEC_YearMonthDay_HourMinuteSecond: // 电子格式 0000-00-00 00:00:00
+            case EFormat.ELEC_YearMonthDay_HourMinuteSecond: // 电子格式 0000-00-00 00:00:00
             {
                 pooledCharArray.Add(date.Year, 4).Add('-').Add(date.Month, 2).Add('-').Add(date.Day, 2).Add(' ')
                     .Add(date.Hour, 2).Add(':').Add(date.Minute, 2).Add(':').Add(date.Second, 2);
                 break;
             }
 
-            case EDateFormat.CN_YearMonthDay_HourMinuteSecond: // 中文格式 0年0月0日 0时0分0秒
+            case EFormat.CN_YearMonthDay_HourMinuteSecond: // 中文格式 0年0月0日 0时0分0秒
             {
                 pooledCharArray.Add(date.Year).Add('年').Add(date.Month).Add('月').Add(date.Day).Add('日').Add(' ')
                     .Add(date.Hour).Add('时').Add(date.Minute).Add('分').Add(date.Second).Add('秒');
@@ -52,4 +106,5 @@ public class DateFormat
             }
         }
     }
+#endregion
 }
