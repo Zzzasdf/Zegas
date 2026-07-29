@@ -1,0 +1,16 @@
+{
+    "name": "Pooled.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:fd35ccc2db05c1149b188a01965393e2"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

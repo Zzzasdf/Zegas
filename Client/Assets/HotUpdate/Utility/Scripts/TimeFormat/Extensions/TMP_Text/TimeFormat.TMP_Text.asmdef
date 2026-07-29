@@ -1,0 +1,19 @@
+{
+    "name": "TimeFormat.TMP_Text",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:fd35ccc2db05c1149b188a01965393e2",
+        "GUID:e51e74f89ee0baf49a00ec47c8eaf794",
+        "GUID:4107f4d597df30a47b8d28934f09b1cb"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

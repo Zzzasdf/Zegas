@@ -1,5 +1,4 @@
 using System;
-using TMPro;
 
 public sealed class PooledCharArray : IDisposable
 {
@@ -23,12 +22,17 @@ public sealed class PooledCharArray : IDisposable
     private char[] _items;
     private int _size;
 
+    public static implicit operator ReadOnlyMemory<char>(PooledCharArray self)
+    {
+        return new ReadOnlyMemory<char>(self._items, 0, self._size);
+    }
+    
     private void Clear()
     {
         Array.Clear(_items, 0, _size);
         _size = 0;
     }
-
+    
     /// <summary>
     /// 添加一组数值
     /// </summary>
@@ -71,11 +75,6 @@ public sealed class PooledCharArray : IDisposable
             Add(spanC[i]);
         }
         return this;
-    }
-
-    public void SetText(in TMP_Text tmpText)
-    {
-        tmpText.SetCharArray(_items, 0, _size);
     }
 
     public override string ToString()

@@ -1,0 +1,32 @@
+using System;
+using TMPro;
+
+public static class DateFormat_TMP_Text
+{
+    public static void SetText(this TMP_Text self, DateFormat.EFormat eFormat, long millSeconds, 
+        string? prefixStr, string? suffixStr)
+    {
+        using (PooledCharArray pooledCharArray = PooledCharArray.Get())
+        {
+            DateFormat.Set(pooledCharArray, eFormat, millSeconds, prefixStr, suffixStr);
+            self.SetText(pooledCharArray);
+        }
+    }
+    public static void SetText(this TMP_Text self, DateFormat.EFormat eFormat, long millSeconds, 
+        ReadOnlySpan<char> prefixChars, ReadOnlySpan<char> suffixChars)
+    {
+        using (PooledCharArray pooledCharArray = PooledCharArray.Get())
+        {
+            DateFormat.Set(pooledCharArray, eFormat, millSeconds, prefixChars, suffixChars);
+            self.SetText(pooledCharArray);
+        }
+    }
+    public static void SetText(this TMP_Text self, DateFormat.EFormat eFormat, long millSeconds)
+    {
+        using (PooledCharArray pooledCharArray = PooledCharArray.Get())
+        {
+            DateFormat.Set(pooledCharArray, eFormat, millSeconds);
+            self.SetText(pooledCharArray);
+        }
+    }
+}

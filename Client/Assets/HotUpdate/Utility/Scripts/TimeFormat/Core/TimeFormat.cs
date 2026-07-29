@@ -1,7 +1,6 @@
 using System;
-using TMPro;
 
-public class TimeFormat
+public static class TimeFormat
 {
     /// 显示格式
     public enum EFormat
@@ -16,35 +15,6 @@ public class TimeFormat
         /// 中文格式 0时0分0秒
         CN_HourMinuteSecond = 20002,
     }
-    
-#region TMP_Text
-    public static void SetTMP(in TMP_Text tmpText, EFormat eFormat, long millSeconds, 
-        string? prefixStr, string? suffixStr)
-    {
-        using (PooledCharArray pooledCharArray = PooledCharArray.Get())
-        {
-            Set(pooledCharArray, eFormat, millSeconds, prefixStr, suffixStr);
-            pooledCharArray.SetText(tmpText);
-        }
-    }
-    public static void SetTMP(in TMP_Text tmpText, EFormat eFormat, long millSeconds, 
-        ReadOnlySpan<char> prefixChars, ReadOnlySpan<char> suffixChars)
-    {
-        using (PooledCharArray pooledCharArray = PooledCharArray.Get())
-        {
-            Set(pooledCharArray, eFormat, millSeconds, prefixChars, suffixChars);
-            pooledCharArray.SetText(tmpText);
-        }
-    }
-    public static void SetTMP(in TMP_Text tmpText, EFormat eFormat, long millSeconds)
-    {
-        using (PooledCharArray pooledCharArray = PooledCharArray.Get())
-        {
-            Set(pooledCharArray, eFormat, millSeconds);
-            pooledCharArray.SetText(tmpText);
-        }
-    }
-#endregion
 
 #region Get
     public static string Get(EFormat eFormat, long millSeconds, 
