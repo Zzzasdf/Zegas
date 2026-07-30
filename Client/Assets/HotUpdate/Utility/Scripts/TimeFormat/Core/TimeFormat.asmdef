@@ -2,7 +2,8 @@
     "name": "TimeFormat",
     "rootNamespace": "",
     "references": [
-        "GUID:fd35ccc2db05c1149b188a01965393e2"
+        "GUID:fd35ccc2db05c1149b188a01965393e2",
+        "GUID:9d262aa4640fbca4a80705b95f56dea7"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

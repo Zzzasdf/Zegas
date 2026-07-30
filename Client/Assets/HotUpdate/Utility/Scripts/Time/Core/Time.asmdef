@@ -1,10 +1,7 @@
 {
-    "name": "TimeFormat.Editor",
+    "name": "SystemTime",
     "rootNamespace": "",
-    "references": [
-        "GUID:4107f4d597df30a47b8d28934f09b1cb",
-        "GUID:0acc523941302664db1f4e527237feb3"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

@@ -1,5 +1,5 @@
 {
-    "name": "Tests",
+    "name": "Pooled.Tests",
     "rootNamespace": "",
     "references": [
         "GUID:27619889b8ba8c24980f49ee34dbb44a",
@@ -11,7 +11,7 @@
     ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
-    "overrideReferences": true,
+    "overrideReferences": false,
     "precompiledReferences": [
         "nunit.framework.dll"
     ],

@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\HotUpdate\Utility\Scripts\Pooled\Editor\Tests\PooledUnit.cs" />
-    <None Include="Assets\HotUpdate\Utility\Scripts\Pooled\Editor\Tests\Tests.asmdef" />
+    <None Include="Assets\HotUpdate\Utility\Scripts\Pooled\Editor\Tests\Pooled.Tests.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.62f3c1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

@@ -6,7 +6,7 @@ using NUnit.Framework;
 using Debug = UnityEngine.Debug;
 
 [TestFixture]
-public class PooledUnit
+public class PooledTest
 {
     public class ExList<T> : List<T>, IReusable
     {

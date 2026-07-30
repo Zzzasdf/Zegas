@@ -1,0 +1,26 @@
+{
+    "name": "TimeFormat.Tests",
+    "rootNamespace": "",
+    "references": [
+        "GUID:27619889b8ba8c24980f49ee34dbb44a",
+        "GUID:0acc523941302664db1f4e527237feb3",
+        "GUID:4107f4d597df30a47b8d28934f09b1cb",
+        "GUID:fd35ccc2db05c1149b188a01965393e2",
+        "GUID:9d262aa4640fbca4a80705b95f56dea7"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
