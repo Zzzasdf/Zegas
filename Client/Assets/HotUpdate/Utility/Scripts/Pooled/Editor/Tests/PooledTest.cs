@@ -1,5 +1,4 @@
 using System;
-using System.Buffers;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -36,27 +35,27 @@ public class PooledTest
     [Test]
     public void PooledListFoo()
     {
-        using (var pList = PooledList<int>.Get())
+        using (var pList = Pooled<List<int>, int>.Get())
         {
-            pList.Add(2);
-            Debug.Assert(pList.Count == 1);
+            pList.Value.Add(2);
+            Debug.Assert(pList.Value.Count == 1);
         }
-        using (var pList = PooledList<int>.Get())
+        using (var pList = Pooled<List<int>, int>.Get())
         {
-            Debug.Assert(pList.Count == 0);
+            Debug.Assert(pList.Value.Count == 0);
         }
         
-        using (var pList = PooledList<long>.Get())
+        using (var pList = Pooled<List<int>, int>.Get())
         {
-            pList.Add(2);
-            Debug.Assert(pList.Count == 1);
+            pList.Value.Add(2);
+            Debug.Assert(pList.Value.Count == 1);
         }
     }
 
     [Test]
     public void PooledCharsFoo()
     {
-        using (PooledCharArray pooled = PooledCharArray.Get())
+        using (PooledChars pooled = PooledChars.Get())
         {
             pooled.Add("ABCD");
             Debug.Log(pooled);
@@ -82,16 +81,12 @@ public class PooledTest
         Stopwatch stopwatch = Stopwatch.StartNew();
         for (int i = 0; i < loopTimer; i++)
         {
-            using (PooledList<int> pooledList = PooledList<int>.Get())
+            using (Pooled<List<int>, int> pooledList = Pooled<List<int>, int>.Get())
             {
-                pooledList.Add(1);
+                pooledList.Value.Add(1);
             }
         }
-
         stopwatch.Stop();
-#if POOLED_EXCEPTION
-        MonitoredObjectPool.Pools["PooledList"][typeof(int)].Clear();
-#endif
         Debug.Log($"对象池循环 {loopTimer} 次的耗时：{stopwatch.ElapsedMilliseconds}毫秒");
     }
     [Test]
@@ -105,6 +100,41 @@ public class PooledTest
         }
         stopwatch.Stop();
         Debug.Log($"实例化循环 {loopTimer} 次的耗时：{stopwatch.ElapsedMilliseconds}毫秒");
+    }
+
+    [Test]
+    public void PooledCollectionFoo()
+    {
+        using (Pooled<List<int>, int> pooled = Pooled<List<int>, int>.Get())
+        {
+            List<int> list =  pooled;
+            list.Add(1);
+            for (int i = 0; i < list.Count; i++)
+            {
+                Debug.Log(list[i]);
+            }
+        }
+    }
+
+    [Test]
+    public void PooledMapFoo()
+    {
+        using (Pooled<Dictionary<int, string>, int, string> pooled = Pooled<Dictionary<int, string>, int, string>.Get())
+        {
+            pooled.Value.Add(1, "A");
+            foreach (var pair in pooled.Value)
+            {
+                Debug.Log(pair.Key + ": "  + pair.Value);
+            }
+        }
+        using (Pooled<Dictionary<string, long>, string, long> pooled = Pooled<Dictionary<string, long>, string, long>.Get())
+        {
+            pooled.Value.Add("A", 1);
+            foreach (var pair in pooled.Value)
+            {
+                Debug.Log(pair.Key + ": "  + pair.Value);
+            }
+        }
     }
 }
 

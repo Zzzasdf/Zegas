@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Converter", "Converter.csproj", "{9bda2a6d-c624-ad90-72e1-0b3ff2241d5b}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{8441f412-22a4-275f-22e6-507969043f15}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pooled", "Pooled.csproj", "{f5b93fd2-9445-77f2-ff30-66d15df6cf61}"
@@ -112,6 +114,8 @@ Global
 		Debug|Any CPU = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9bda2a6d-c624-ad90-72e1-0b3ff2241d5b}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9bda2a6d-c624-ad90-72e1-0b3ff2241d5b}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8441f412-22a4-275f-22e6-507969043f15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8441f412-22a4-275f-22e6-507969043f15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{f5b93fd2-9445-77f2-ff30-66d15df6cf61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

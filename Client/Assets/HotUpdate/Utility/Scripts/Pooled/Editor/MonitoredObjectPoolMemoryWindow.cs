@@ -36,6 +36,19 @@ public class MonitoredObjectPoolMemoryWindow: EditorWindow
         {
             EditorGUILayout.LabelField("ClassName");
             EditorGUILayout.LabelField("CountActive\tCountInactive\tCountAll");
+            if (GUILayout.Button("Clear"))
+            {
+                foreach (var groupPair in poolGroupDict)
+                {
+                    foreach (var poolsPair in groupPair.Value)
+                    {
+                        foreach (var poolPair in poolsPair.Value)
+                        {
+                            poolPair.Clear();
+                        }
+                    }
+                }
+            }
         }
         foreach (var groupPair in poolGroupDict)
         {

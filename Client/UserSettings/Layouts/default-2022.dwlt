@@ -20,11 +20,39 @@ MonoBehaviour:
     height: 989
   m_ShowMode: 4
   m_Title: Inspector
-  m_RootView: {fileID: 3}
-  m_MinSize: {x: 875, y: 300}
+  m_RootView: {fileID: 4}
+  m_MinSize: {x: 875, y: 321}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: MonitoredObjectPoolMemoryWindow
+  m_EditorClassIdentifier: 
+  m_Children: []
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1079
+    height: 392
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 12}
+  m_Panes:
+  - {fileID: 15}
+  - {fileID: 13}
+  - {fileID: 12}
+  m_Selected: 2
+  m_LastSelected: 1
+--- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,18 +68,18 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 348
-    width: 818
-    height: 392
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 16}
+    y: 392
+    width: 1079
+    height: 369
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 14}
   m_Panes:
-  - {fileID: 18}
   - {fileID: 16}
+  - {fileID: 14}
   m_Selected: 1
   m_LastSelected: 0
---- !u!114 &3
+--- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,9 +92,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 4}
-  - {fileID: 6}
   - {fileID: 5}
+  - {fileID: 7}
+  - {fileID: 6}
   m_Position:
     serializedVersion: 2
     x: 0
@@ -79,7 +107,7 @@ MonoBehaviour:
   m_TopViewHeight: 30
   m_UseBottomView: 1
   m_BottomViewHeight: 20
---- !u!114 &4
+--- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,7 +129,7 @@ MonoBehaviour:
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
   m_LastLoadedLayoutName: 
---- !u!114 &5
+--- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,7 +150,7 @@ MonoBehaviour:
     height: 20
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
---- !u!114 &6
+--- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,45 +163,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 7}
+  - {fileID: 8}
+  - {fileID: 10}
+  - {fileID: 11}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 30
     width: 1920
     height: 939
-  m_MinSize: {x: 400, y: 150}
-  m_MaxSize: {x: 32384, y: 24288}
-  vertical: 1
-  controlID: 14
-  draggingID: 0
---- !u!114 &7
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 1
-  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Children:
-  - {fileID: 8}
-  - {fileID: 11}
-  - {fileID: 12}
-  - {fileID: 13}
-  m_Position:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1920
-    height: 939
-  m_MinSize: {x: 400, y: 150}
-  m_MaxSize: {x: 32384, y: 24288}
+  m_MinSize: {x: 300, y: 150}
+  m_MaxSize: {x: 24288, y: 24288}
   vertical: 0
-  controlID: 15
+  controlID: 3359
   draggingID: 0
 --- !u!114 &8
 MonoBehaviour:
@@ -188,49 +190,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 9}
   - {fileID: 2}
-  - {fileID: 10}
+  - {fileID: 3}
+  - {fileID: 9}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 818
+    width: 1079
     height: 939
   m_MinSize: {x: 100, y: 150}
   m_MaxSize: {x: 8096, y: 24288}
   vertical: 1
-  controlID: 16
+  controlID: 3360
   draggingID: 0
 --- !u!114 &9
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 1
-  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: MonitoredObjectPoolMemoryWindow
-  m_EditorClassIdentifier: 
-  m_Children: []
-  m_Position:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 818
-    height: 348
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 14}
-  m_Panes:
-  - {fileID: 17}
-  - {fileID: 15}
-  - {fileID: 14}
-  m_Selected: 2
-  m_LastSelected: 1
---- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,43 +220,17 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 740
-    width: 818
-    height: 199
+    y: 761
+    width: 1079
+    height: 178
   m_MinSize: {x: 101, y: 121}
   m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 19}
+  m_ActualView: {fileID: 17}
   m_Panes:
-  - {fileID: 19}
+  - {fileID: 17}
   m_Selected: 0
   m_LastSelected: 0
---- !u!114 &11
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 1
-  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Children: []
-  m_Position:
-    serializedVersion: 2
-    x: 818
-    y: 0
-    width: 181
-    height: 939
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 20}
-  m_Panes:
-  - {fileID: 20}
-  m_Selected: 0
-  m_LastSelected: 0
---- !u!114 &12
+--- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -297,18 +245,18 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 999
+    x: 1079
     y: 0
-    width: 379
+    width: 335
     height: 939
   m_MinSize: {x: 232, y: 271}
   m_MaxSize: {x: 10002, y: 10021}
-  m_ActualView: {fileID: 21}
+  m_ActualView: {fileID: 18}
   m_Panes:
-  - {fileID: 21}
+  - {fileID: 18}
   m_Selected: 0
   m_LastSelected: 0
---- !u!114 &13
+--- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -323,18 +271,18 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1378
+    x: 1414
     y: 0
-    width: 542
+    width: 506
     height: 939
   m_MinSize: {x: 275, y: 50}
   m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 22}
+  m_ActualView: {fileID: 19}
   m_Panes:
-  - {fileID: 22}
+  - {fileID: 19}
   m_Selected: 0
   m_LastSelected: 0
---- !u!114 &14
+--- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -356,8 +304,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-    width: 817
-    height: 327
+    width: 1078
+    height: 371
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -368,7 +316,7 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_OverlaysVisible: 1
---- !u!114 &15
+--- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -390,8 +338,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-    width: 817
-    height: 327
+    width: 978
+    height: 335
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -402,7 +350,7 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_OverlaysVisible: 1
---- !u!114 &16
+--- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -423,9 +371,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 421
-    width: 817
-    height: 371
+    y: 465
+    width: 1078
+    height: 348
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -437,22 +385,22 @@ MonoBehaviour:
     m_SaveData: []
     m_OverlaysVisible: 1
   m_Spl:
-    ID: 185
-    splitterInitialOffset: 327
+    ID: 193
+    splitterInitialOffset: 201
     currentActiveSplitter: -1
     realSizes:
-    - 222
-    - 79
+    - 130
+    - 148
     relativeSizes:
-    - 0.7363897
-    - 0.2636103
+    - 0.4676259
+    - 0.53237414
     minSizes:
     - 32
     - 32
     maxSizes:
     - 0
     - 0
-    lastTotalSize: 301
+    lastTotalSize: 278
     splitSize: 6
     xOffset: 0
     m_Version: 1
@@ -462,7 +410,7 @@ MonoBehaviour:
     oldSplitSize: 0
   m_TestTypeToolbarIndex: 1
   m_PlayModeTestListGUI:
-    m_Window: {fileID: 16}
+    m_Window: {fileID: 14}
     m_NewResultList:
     - id: 1012
       uniqueId: '[Zegas][suite]'
@@ -514,15 +462,15 @@ MonoBehaviour:
       - Uncategorized
     m_SelectedOption: 0
   m_EditModeTestListGUI:
-    m_Window: {fileID: 16}
+    m_Window: {fileID: 14}
     m_NewResultList:
     - id: 1000
       uniqueId: '[Zegas][suite]'
       name: Zegas
       fullName: Zegas
-      resultStatus: 1
-      duration: 0.0494557
-      messages: 
+      resultStatus: 2
+      duration: 0.0129035
+      messages: One or more child tests had errors
       output: 
       stacktrace: 
       notRunnable: 0
@@ -536,9 +484,9 @@ MonoBehaviour:
       uniqueId: '[Pooled.Tests][D:/UGit/Zegas/Client/Library/ScriptAssemblies/Pooled.Tests.dll][suite]'
       name: Pooled.Tests.dll
       fullName: D:/UGit/Zegas/Client/Library/ScriptAssemblies/Pooled.Tests.dll
-      resultStatus: 1
-      duration: 0.365682
-      messages: 
+      resultStatus: 2
+      duration: 0.0057138
+      messages: One or more child tests had errors
       output: 
       stacktrace: 
       notRunnable: 0
@@ -552,9 +500,9 @@ MonoBehaviour:
       uniqueId: Pooled.Tests.dll/[Pooled.Tests][PooledTest][suite]
       name: PooledTest
       fullName: PooledTest
-      resultStatus: 1
-      duration: 0.3637748
-      messages: 
+      resultStatus: 2
+      duration: 0.0051285
+      messages: One or more child tests had errors
       output: 
       stacktrace: 
       notRunnable: 0
@@ -568,10 +516,10 @@ MonoBehaviour:
       uniqueId: Pooled.Tests.dll/PooledTest/[Pooled.Tests][PooledTest.InstancePerformanceFoo]
       name: InstancePerformanceFoo
       fullName: PooledTest.InstancePerformanceFoo
-      resultStatus: 0
-      duration: 0
+      resultStatus: 1
+      duration: 0.1358348
       messages: 
-      output: 
+      output: "\u5B9E\u4F8B\u5316\u5FAA\u73AF 1000000 \u6B21\u7684\u8017\u65F6\uFF1A132\u6BEB\u79D2\r\n"
       stacktrace: 
       notRunnable: 0
       ignoredOrSkipped: 0
@@ -582,13 +530,38 @@ MonoBehaviour:
       parentId: 1001
       parentUniqueId: Pooled.Tests.dll/[Pooled.Tests][PooledTest][suite]
     - id: 1004
-      uniqueId: Pooled.Tests.dll/PooledTest/[Pooled.Tests][PooledTest.PooledBitArrayFoo]
-      name: PooledBitArrayFoo
-      fullName: PooledTest.PooledBitArrayFoo
-      resultStatus: 0
-      duration: 0
+      uniqueId: Pooled.Tests.dll/PooledTest/[Pooled.Tests][PooledTest.PooledCharsFoo]
+      name: PooledCharsFoo
+      fullName: PooledTest.PooledCharsFoo
+      resultStatus: 1
+      duration: 0.0022886
       messages: 
-      output: 
+      output: 'ABCD
+
+        ABCD
+
+        BBCD
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Pooled.Tests.dll/[Pooled.Tests][PooledTest][suite]
+    - id: 1008
+      uniqueId: Pooled.Tests.dll/PooledTest/[Pooled.Tests][PooledTest.PooledCollectionFoo]
+      name: PooledCollectionFoo
+      fullName: PooledTest.PooledCollectionFoo
+      resultStatus: 1
+      duration: 0.0076834
+      messages: 
+      output: '1
+
+'
       stacktrace: 
       notRunnable: 0
       ignoredOrSkipped: 0
@@ -602,8 +575,8 @@ MonoBehaviour:
       uniqueId: Pooled.Tests.dll/PooledTest/[Pooled.Tests][PooledTest.PooledFoo]
       name: PooledFoo
       fullName: PooledTest.PooledFoo
-      resultStatus: 0
-      duration: 0
+      resultStatus: 1
+      duration: 0.0012605
       messages: 
       output: 
       stacktrace: 
@@ -619,11 +592,42 @@ MonoBehaviour:
       uniqueId: Pooled.Tests.dll/PooledTest/[Pooled.Tests][PooledTest.PooledListFoo]
       name: PooledListFoo
       fullName: PooledTest.PooledListFoo
-      resultStatus: 0
-      duration: 0
+      resultStatus: 1
+      duration: 0.0003065
       messages: 
       output: 
       stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Pooled.Tests.dll/[Pooled.Tests][PooledTest][suite]
+    - id: 1009
+      uniqueId: Pooled.Tests.dll/PooledTest/[Pooled.Tests][PooledTest.PooledMapFoo]
+      name: PooledMapFoo
+      fullName: PooledTest.PooledMapFoo
+      resultStatus: 2
+      duration: 0.0042499
+      messages: 'System.NullReferenceException : Object reference not set to an instance
+        of an object'
+      output: 
+      stacktrace: "  at Pooled`3+<>c[TMap,TKey,TValue].<.cctor>b__10_1 (Pooled`3[TMap,TKey,TValue]
+        l) [0x00000] in D:\\UGit\\Zegas\\Client\\Assets\\HotUpdate\\Utility\\Scripts\\Pooled\\Pooled.Map.cs:13
+        \r\n  at MonitoredObjectPool+ObjectPool`2+<>c__DisplayClass3_0[TItem,TMonitoredKey].<OnRelease>b__0
+        (TItem tItem) [0x00000] in D:\\UGit\\Zegas\\Client\\Assets\\HotUpdate\\Utility\\Scripts\\Pooled\\MonitoredObjectPool.cs:49
+        \r\n  at UnityEngine.Pool.ObjectPool`1[T].Release (T element) [0x0006e] in
+        <8cdc7e7e8a17404287a8b220eb9eec72>:0 \r\n  at MonitoredObjectPool+ObjectPool`2[TItem,TMonitoredKey].Release
+        (TItem toRelease) [0x00000] in D:\\UGit\\Zegas\\Client\\Assets\\HotUpdate\\Utility\\Scripts\\Pooled\\MonitoredObjectPool.cs:56
+        \r\n  at Pooled`3[TMap,TKey,TValue].System.IDisposable.Dispose () [0x00000]
+        in D:\\UGit\\Zegas\\Client\\Assets\\HotUpdate\\Utility\\Scripts\\Pooled\\Pooled.Map.cs:18
+        \r\n  at PooledTest.PooledMapFoo () [0x0006b] in D:\\UGit\\Zegas\\Client\\Assets\\HotUpdate\\Utility\\Scripts\\Pooled\\Editor\\Tests\\PooledTest.cs:129
+        \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n 
+        at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags
+        invokeAttr, System.Reflection.Binder binder, System.Object[] parameters,
+        System.Globalization.CultureInfo culture) [0x0006a] in <1071a2cb0cb3433aae80a793c277a048>:0 "
       notRunnable: 0
       ignoredOrSkipped: 0
       description: 
@@ -636,11 +640,20 @@ MonoBehaviour:
       uniqueId: Pooled.Tests.dll/PooledTest/[Pooled.Tests][PooledTest.PooledPerformanceCompareFoo]
       name: PooledPerformanceCompareFoo
       fullName: PooledTest.PooledPerformanceCompareFoo
-      resultStatus: 1
-      duration: 0.3630793
-      messages: 
-      output: 
-      stacktrace: 
+      resultStatus: 2
+      duration: 0.2002867
+      messages: 'System.Collections.Generic.KeyNotFoundException : The given key
+        ''PooledList'' was not present in the dictionary.'
+      output: "pool item gc eg!! Pooled`3[System.Collections.Generic.Dictionary`2[System.Int32,System.String],System.Int32,System.String]
+        => \u5F53\u524D\u5BF9\u8C61\u88AB\u9500\u6BC1\uFF0C\u4EE3\u7801\u4E2D\u5B58\u5728\u672A\u56DE\u6536\u8BE5\u7C7B\u578B\u7684\u5730\u65B9\r\n"
+      stacktrace: "  at System.Collections.Generic.Dictionary`2[TKey,TValue].get_Item
+        (TKey key) [0x0001e] in <1071a2cb0cb3433aae80a793c277a048>:0 \r\n  at PooledTest.PooledPerformanceFoo
+        () [0x0003a] in D:\\UGit\\Zegas\\Client\\Assets\\HotUpdate\\Utility\\Scripts\\Pooled\\Editor\\Tests\\PooledTest.cs:92
+        \r\n  at PooledTest.PooledPerformanceCompareFoo () [0x00000] in D:\\UGit\\Zegas\\Client\\Assets\\HotUpdate\\Utility\\Scripts\\Pooled\\Editor\\Tests\\PooledTest.cs:75
+        \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n 
+        at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags
+        invokeAttr, System.Reflection.Binder binder, System.Object[] parameters,
+        System.Globalization.CultureInfo culture) [0x0006a] in <1071a2cb0cb3433aae80a793c277a048>:0 "
       notRunnable: 0
       ignoredOrSkipped: 0
       description: 
@@ -653,11 +666,18 @@ MonoBehaviour:
       uniqueId: Pooled.Tests.dll/PooledTest/[Pooled.Tests][PooledTest.PooledPerformanceFoo]
       name: PooledPerformanceFoo
       fullName: PooledTest.PooledPerformanceFoo
-      resultStatus: 1
-      duration: 0.2160119
-      messages: 
+      resultStatus: 2
+      duration: 0.1944663
+      messages: 'System.Collections.Generic.KeyNotFoundException : The given key
+        ''PooledList'' was not present in the dictionary.'
       output: 
-      stacktrace: 
+      stacktrace: "  at System.Collections.Generic.Dictionary`2[TKey,TValue].get_Item
+        (TKey key) [0x0001e] in <1071a2cb0cb3433aae80a793c277a048>:0 \r\n  at PooledTest.PooledPerformanceFoo
+        () [0x0003a] in D:\\UGit\\Zegas\\Client\\Assets\\HotUpdate\\Utility\\Scripts\\Pooled\\Editor\\Tests\\PooledTest.cs:92
+        \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n 
+        at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags
+        invokeAttr, System.Reflection.Binder binder, System.Object[] parameters,
+        System.Globalization.CultureInfo culture) [0x0006a] in <1071a2cb0cb3433aae80a793c277a048>:0 "
       notRunnable: 0
       ignoredOrSkipped: 0
       description: 
@@ -671,7 +691,7 @@ MonoBehaviour:
       name: TimeFormat.Tests.dll
       fullName: D:/UGit/Zegas/Client/Library/ScriptAssemblies/TimeFormat.Tests.dll
       resultStatus: 1
-      duration: 0.0233859
+      duration: 0.0323986
       messages: 
       output: 
       stacktrace: 
@@ -687,7 +707,7 @@ MonoBehaviour:
       name: DateFormatTest
       fullName: DateFormatTest
       resultStatus: 1
-      duration: 0.0212214
+      duration: 0.0078853
       messages: 
       output: 
       stacktrace: 
@@ -703,10 +723,10 @@ MonoBehaviour:
       name: DateUnitFoo
       fullName: DateFormatTest.DateUnitFoo
       resultStatus: 1
-      duration: 0.0100457
+      duration: 0.0035625
       messages: 
-      output: "\u524D2026-07-30 09:26:02\u540E\r\n\u524D2026-07-30 09:26:02\r\n2026\u5E747\u670830\u65E5
-        9\u65F626\u52062\u79D2\u540E\r\n2026\u5E747\u670830\u65E5 9\u65F626\u52062\u79D2\r\n"
+      output: "\u524D2026-07-30 16:43:08\u540E\r\n\u524D2026-07-30 16:43:08\r\n2026\u5E747\u670830\u65E5
+        16\u65F643\u52068\u79D2\u540E\r\n2026\u5E747\u670830\u65E5 16\u65F643\u52068\u79D2\r\n"
       stacktrace: 
       notRunnable: 0
       ignoredOrSkipped: 0
@@ -721,7 +741,7 @@ MonoBehaviour:
       name: TimeFormatTest
       fullName: TimeFormatTest
       resultStatus: 1
-      duration: 0.0073065
+      duration: 0.0088226
       messages: 
       output: 
       stacktrace: 
@@ -737,9 +757,9 @@ MonoBehaviour:
       name: TimeUnitFoo
       fullName: TimeFormatTest.TimeUnitFoo
       resultStatus: 1
-      duration: 0.0019153
+      duration: 0.0025921
       messages: 
-      output: "\u524D20664\u592901:21:47\u540E\r\n\u524D495937:21:47\r\n20664\u59291\u65F621\u520647\u79D2\u540E\r\n495937\u65F621\u520647\u79D2\r\n"
+      output: "\u524D20664\u592908:43:08\u540E\r\n\u524D495944:43:08\r\n20664\u59298\u65F643\u52068\u79D2\u540E\r\n495944\u65F643\u52068\u79D2\r\n"
       stacktrace: 
       notRunnable: 0
       ignoredOrSkipped: 0
@@ -749,15 +769,40 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1011
       parentUniqueId: TimeFormat.Tests.dll/[TimeFormat.Tests][TimeFormatTest][suite]
-    m_ResultText: "DateUnitFoo (0.010s)\n---\n\u524D2026-07-30 09:26:02\u540E\r\n\u524D2026-07-30
-      09:26:02\r\n2026\u5E747\u670830\u65E5 9\u65F626\u52062\u79D2\u540E\r\n2026\u5E747\u670830\u65E5
-      9\u65F626\u52062\u79D2"
-    m_ResultStacktrace: 
+    m_ResultText: "PooledMapFoo (0.004s)\n---\nSystem.NullReferenceException : Object
+      reference not set to an instance of an object\n---\nat Pooled`3+<>c[TMap,TKey,TValue].<.cctor>b__10_1
+      (Pooled`3[TMap,TKey,TValue] l) [0x00000] in D:\\UGit\\Zegas\\Client\\Assets\\HotUpdate\\Utility\\Scripts\\Pooled\\Pooled.Map.cs:13
+      \r\n  at MonitoredObjectPool+ObjectPool`2+<>c__DisplayClass3_0[TItem,TMonitoredKey].<OnRelease>b__0
+      (TItem tItem) [0x00000] in D:\\UGit\\Zegas\\Client\\Assets\\HotUpdate\\Utility\\Scripts\\Pooled\\MonitoredObjectPool.cs:49
+      \r\n  at UnityEngine.Pool.ObjectPool`1[T].Release (T element) [0x0006e] in
+      <8cdc7e7e8a17404287a8b220eb9eec72>:0 \r\n  at MonitoredObjectPool+ObjectPool`2[TItem,TMonitoredKey].Release
+      (TItem toRelease) [0x00000] in D:\\UGit\\Zegas\\Client\\Assets\\HotUpdate\\Utility\\Scripts\\Pooled\\MonitoredObjectPool.cs:56
+      \r\n  at Pooled`3[TMap,TKey,TValue].System.IDisposable.Dispose () [0x00000]
+      in D:\\UGit\\Zegas\\Client\\Assets\\HotUpdate\\Utility\\Scripts\\Pooled\\Pooled.Map.cs:18
+      \r\n  at PooledTest.PooledMapFoo () [0x0006b] in D:\\UGit\\Zegas\\Client\\Assets\\HotUpdate\\Utility\\Scripts\\Pooled\\Editor\\Tests\\PooledTest.cs:129
+      \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n 
+      at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags
+      invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo
+      culture) [0x0006a] in <1071a2cb0cb3433aae80a793c277a048>:0"
+    m_ResultStacktrace: "  at Pooled`3+<>c[TMap,TKey,TValue].<.cctor>b__10_1 (Pooled`3[TMap,TKey,TValue]
+      l) [0x00000] in D:\\UGit\\Zegas\\Client\\Assets\\HotUpdate\\Utility\\Scripts\\Pooled\\Pooled.Map.cs:13
+      \r\n  at MonitoredObjectPool+ObjectPool`2+<>c__DisplayClass3_0[TItem,TMonitoredKey].<OnRelease>b__0
+      (TItem tItem) [0x00000] in D:\\UGit\\Zegas\\Client\\Assets\\HotUpdate\\Utility\\Scripts\\Pooled\\MonitoredObjectPool.cs:49
+      \r\n  at UnityEngine.Pool.ObjectPool`1[T].Release (T element) [0x0006e] in
+      <8cdc7e7e8a17404287a8b220eb9eec72>:0 \r\n  at MonitoredObjectPool+ObjectPool`2[TItem,TMonitoredKey].Release
+      (TItem toRelease) [0x00000] in D:\\UGit\\Zegas\\Client\\Assets\\HotUpdate\\Utility\\Scripts\\Pooled\\MonitoredObjectPool.cs:56
+      \r\n  at Pooled`3[TMap,TKey,TValue].System.IDisposable.Dispose () [0x00000]
+      in D:\\UGit\\Zegas\\Client\\Assets\\HotUpdate\\Utility\\Scripts\\Pooled\\Pooled.Map.cs:18
+      \r\n  at PooledTest.PooledMapFoo () [0x0006b] in D:\\UGit\\Zegas\\Client\\Assets\\HotUpdate\\Utility\\Scripts\\Pooled\\Editor\\Tests\\PooledTest.cs:129
+      \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n 
+      at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags
+      invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo
+      culture) [0x0006a] in <1071a2cb0cb3433aae80a793c277a048>:0 "
     m_TestListState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: f0843d53
-      m_LastClickedID: 1396540656
-      m_ExpandedIDs: ea75beb82a3e7abda4b9d6bd2a7ea0ee9f5253f022aef8f784962a137ebaf51b6115b733768d114f0479a36394053275ffffff7f
+      scrollPos: {x: 0, y: 98}
+      m_SelectedIDs: f3f938b3
+      m_LastClickedID: -1288111629
+      m_ExpandedIDs: ea75beb82a3e7abda4b9d6bd2a7ea0ee9f5253f084962a137ebaf51b768d114f0479a36394053275ffffff7f
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -783,7 +828,7 @@ MonoBehaviour:
       selectedCategoryMask: 0
       availableCategories:
       - Uncategorized
---- !u!114 &17
+--- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -805,8 +850,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-    width: 817
-    height: 164
+    width: 524
+    height: 335
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -874,7 +919,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 1
       snapOffset: {x: 0, y: -175}
-      snapOffsetDelta: {x: 0, y: 11}
+      snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 2
       id: unity-transform-toolbar
       index: 0
@@ -1218,7 +1263,7 @@ MonoBehaviour:
   m_SceneVisActive: 1
   m_LastLockedObject: {fileID: 0}
   m_ViewIsLockedToObject: 0
---- !u!114 &18
+--- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1317,7 +1362,7 @@ MonoBehaviour:
   m_XRRenderMode: 0
   m_RenderTexture: {fileID: 0}
   m_showToolbar: 1
---- !u!114 &19
+--- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1338,9 +1383,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 813
-    width: 817
-    height: 178
+    y: 780
+    width: 1078
+    height: 157
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1351,70 +1396,7 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_OverlaysVisible: 1
---- !u!114 &20
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 1
-  m_Script: {fileID: 12061, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Hierarchy
-    m_Image: {fileID: 7966133145522015247, guid: 0000000000000000d000000000000000, type: 0}
-    m_Tooltip: 
-  m_Pos:
-    serializedVersion: 2
-    x: 818
-    y: 73
-    width: 179
-    height: 918
-  m_SerializedDataModeController:
-    m_DataMode: 0
-    m_PreferredDataMode: 0
-    m_SupportedDataModes: 
-    isAutomatic: 1
-  m_ViewDataDictionary: {fileID: 0}
-  m_OverlayCanvas:
-    m_LastAppliedPresetName: Default
-    m_SaveData: []
-    m_OverlaysVisible: 1
-  m_SceneHierarchy:
-    m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 1093ffffec94fffff497ffff2c9bffff389cffffb2d2ffff0ed3ffff6ad3ffff2afbffff
-      m_RenameOverlay:
-        m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
-        m_EditFieldRect:
-          serializedVersion: 2
-          x: 0
-          y: 0
-          width: 0
-          height: 0
-        m_UserData: 0
-        m_IsWaitingForDelay: 0
-        m_IsRenaming: 0
-        m_OriginalEventType: 11
-        m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 4}
-      m_SearchString: 
-    m_ExpandedScenes: []
-    m_CurrenRootInstanceID: 0
-    m_LockTracker:
-      m_IsLocked: 1
-    m_CurrentSortingName: TransformSorting
-  m_WindowGUID: 2b71cf0fb17554d48b87f27f1f15cf51
---- !u!114 &21
+--- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1434,9 +1416,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 999
+    x: 1079
     y: 73
-    width: 377
+    width: 333
     height: 918
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -1459,7 +1441,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/HotUpdate/Utility/Scripts/Pooled/Editor
+    - Assets/HotUpdate/Utility/Scripts/Pooled/Editor/Tests
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1467,16 +1449,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/HotUpdate/Utility/Scripts/Pooled/Editor
+  - Assets/HotUpdate/Utility/Scripts/Pooled/Editor/Tests
   m_LastFoldersGridSize: 16
   m_LastProjectPath: D:\UGit\Zegas\Client
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 12630000
-    m_LastClickedID: 25362
-    m_ExpandedIDs: 00000000de620000e0620000e2620000e4620000e6620000e8620000ec620000ee620000f0620000f2620000f4620000f8620000fa620000fe620000006300000a6300003465000000ca9a3b
+    m_SelectedIDs: 30630000
+    m_LastClickedID: 25392
+    m_ExpandedIDs: 00000000e4620000e6620000e8620000ea620000ec620000ee620000f0620000f2620000f4620000f6620000fa620000fc620000fe62000000630000026300001a630000206300004063000060630000646300006c630000746300008063000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1492,7 +1474,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 12}
+      m_ClientGUIView: {fileID: 10}
     m_SearchString: 
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
@@ -1504,7 +1486,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000de620000e0620000e2620000e4620000e6620000e8620000ea620000ec620000ee620000f0620000f2620000f4620000f6620000f8620000fa620000fc620000fe62000000630000
+    m_ExpandedIDs: 00000000e4620000e6620000e8620000ea620000ec620000ee620000f0620000f2620000f4620000f6620000f8620000fa620000fc620000fe620000006300000263000004630000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1531,24 +1513,24 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: d2630000785600007c610000c86100002c9d00009aa20000a6a20000aaa20000f447000060810000b464000038680000526800003c6b00001e68000062670000146500000a6e0000e46d00000e4f0000e2c600001e7a000002700000ac6b00003c700000000000007e7000001a720000905d0000a05d00003a4b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: MonitoredObjectPoolMemoryWindow
-      m_OriginalName: MonitoredObjectPoolMemoryWindow
+      m_Name: PooledCharArray
+      m_OriginalName: PooledCharArray
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 19386
+      m_UserData: 24914
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 12}
+      m_ClientGUIView: {fileID: 10}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -1559,8 +1541,8 @@ MonoBehaviour:
     m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 16
   m_SkipHiddenPackages: 0
-  m_DirectoriesAreaWidth: 201.66675
---- !u!114 &22
+  m_DirectoriesAreaWidth: 215
+--- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1580,9 +1562,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1378
+    x: 1414
     y: 73
-    width: 541
+    width: 505
     height: 918
   m_SerializedDataModeController:
     m_DataMode: 0
