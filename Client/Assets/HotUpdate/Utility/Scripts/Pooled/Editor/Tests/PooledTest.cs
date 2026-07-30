@@ -2,6 +2,7 @@ using System;
 using System.Buffers;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using NUnit.Framework;
 using Debug = UnityEngine.Debug;
 
@@ -53,18 +54,19 @@ public class PooledTest
     }
 
     [Test]
-    public void PooledBitArrayFoo()
+    public void PooledCharsFoo()
     {
-        // ArrayPool<int>.Shared.Rent(5);
-        // ArrayPool<int>.Shared.Return();
-        // Span<T>
-        var l = MemoryPool<int>.Shared;
-            var d = l.Rent(5);
-            ReadOnlySpan<char> chars = null;
-            for (int i = 0; i < chars.Length; i++)
-            {
-                var char1 = chars[i];
-            }
+        using (PooledCharArray pooled = PooledCharArray.Get())
+        {
+            pooled.Add("ABCD");
+            Debug.Log(pooled);
+            ReadOnlyMemory<char> a = pooled;
+            MemoryMarshal.TryGetArray(a, out ArraySegment<char> segment);
+            char[] b = segment.Array;
+            Debug.Log(new string(b));
+            b[0] = 'B';
+            Debug.Log(pooled);
+        }
     }
 
     private const int loopTimer = 1_000_000;

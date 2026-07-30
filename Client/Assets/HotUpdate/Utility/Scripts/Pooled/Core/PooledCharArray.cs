@@ -8,10 +8,8 @@ public sealed class PooledCharArray : IDisposable
             l => l.Clear());
 
     public static UnityEngine.Pool.PooledObject<PooledCharArray> Get(out PooledCharArray value) => s_Pool.Get(out value);
-    public static PooledCharArray Get()
-    {
-        return s_Pool.Get();
-    }
+    public static PooledCharArray Get() => s_Pool.Get();
+    
     private PooledCharArray() => _items = new char[4];
     void IDisposable.Dispose() => s_Pool.Release(this);
 
@@ -67,6 +65,10 @@ public sealed class PooledCharArray : IDisposable
         _items[_size] = c;
         _size++;
         return this;
+    }
+    public PooledCharArray Add(string chars)
+    {
+        return AddRange(chars.AsSpan());
     }
     public PooledCharArray AddRange(ReadOnlySpan<char> spanC)
     {
