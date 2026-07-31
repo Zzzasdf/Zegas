@@ -1,11 +1,6 @@
 using System;
 
-public interface ISystemTime
-{
-    
-}
-
-public class SystemTime: ISystemTime
+public static class SystemTime
 {
     // Unix纪元（即1970年1月1日00:00:00 UTC）
     private static  readonly DateTime unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
@@ -33,7 +28,7 @@ public class SystemTime: ISystemTime
     }
     
     /// 是否在同一天
-    public bool AreSameDay(long unixMilliseconds1, long unixMilliseconds2)
+    public static bool AreSameDay(long unixMilliseconds1, long unixMilliseconds2)
     {
         // 将毫秒数转换为DateTime对象（UTC时间）
         DateTime dateTime1 = DateTimeOffset.FromUnixTimeMilliseconds(unixMilliseconds1).UtcDateTime;
@@ -46,7 +41,7 @@ public class SystemTime: ISystemTime
     }
     
     /// 是否在今天
-    public bool IsToday(long unixMilliseconds)
+    public static bool IsToday(long unixMilliseconds)
     {
         // 将毫秒数转换为DateTime对象（本地时间）
         DateTime dateTime = DateTimeOffset.FromUnixTimeMilliseconds(unixMilliseconds).LocalDateTime;
