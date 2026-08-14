@@ -46,7 +46,6 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.62f3c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Services\Converter\SourceCode\List\Long\Conveter\HashSet\HashSetIntReverseConverter.cs" />
     <Compile Include="Assets\Services\Converter\Sealed\MapIntBitReverseConverter.cs" />
     <Compile Include="Assets\Services\Converter\SourceCode\List\Long\Conveter\Collections\ListIntConverter.cs" />
     <Compile Include="Assets\Services\Converter\SourceCode\List\Int\Conveter\Bitmap\BitmapConverter.cs" />
@@ -98,6 +97,7 @@
     <Compile Include="Assets\Services\Converter\SourceCode\List\Long\Conveter\Map\MapLongBitConverter.cs" />
     <Compile Include="Assets\Services\Converter\SourceCode\List\Long\Conveter\Collections\ListLongConverter.cs" />
     <Compile Include="Assets\Services\Converter\SourceCode\List\Long\Conveter\Map\MapIntBitConverter.cs" />
+    <Compile Include="Assets\Services\Converter\SourceCode\List\Long\Conveter\HashSet\HashSetIntReverseConverter.cs" />
     <None Include="Assets\Services\Converter\Converter.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.62f3c1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>

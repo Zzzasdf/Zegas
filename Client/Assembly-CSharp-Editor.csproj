@@ -51,6 +51,7 @@
     <Compile Include="Assets\Editor\Macro\MacroDefinerWindow.Configure.cs" />
     <Compile Include="Assets\AOT\Scripts\Editor\SchemaTools.cs" />
     <Compile Include="Assets\Editor\Macro\MacroDefinerWindow.cs" />
+    <Compile Include="Assets\Editor\OpenFolder.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.62f3c1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
