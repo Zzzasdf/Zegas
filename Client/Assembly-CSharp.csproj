@@ -46,39 +46,23 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.62f3c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\MarbleLotteryMachine\MarbleLotteryMachineObstacle.cs" />
     <Compile Include="Assets\AOT\Scripts\PatchLogic\FsmNode\FsmDownloadPackageOver.cs" />
-    <Compile Include="Assets\MarbleLotteryMachine\MarbleLotteryMachineLauncher.cs" />
     <Compile Include="Assets\AOT\Scripts\EventDefine\UserEventDefine.cs" />
-    <Compile Include="Assets\MarbleLotteryMachine\CSLDictionary.cs" />
     <Compile Include="Assets\AOT\Scripts\EventDefine\SceneEventDefine.cs" />
-    <Compile Include="Assets\MarbleLotteryMachine\BindAttribute.cs" />
     <Compile Include="Assets\AOT\Scripts\PatchLogic\PatchOperation.cs" />
     <Compile Include="Assets\AOT\Scripts\PatchLogic\PatchWindow.cs" />
     <Compile Include="Assets\AOT\Scripts\Boot.ModeConfire.cs" />
-    <Compile Include="Assets\MarbleLotteryMachine\MarbleLotteryMachineActivityArea.cs" />
-    <Compile Include="Assets\MarbleLotteryMachine\MarbleLotteryMachine.Scene.cs" />
     <Compile Include="Assets\AOT\Scripts\EventDefine\PatchEventDefine.cs" />
-    <Compile Include="Assets\MarbleLotteryMachine\MarbleLotteryMachine.Ball.cs" />
-    <Compile Include="Assets\MarbleLotteryMachine\OutAttribute.cs" />
-    <Compile Include="Assets\MarbleLotteryMachine\MarbleLotteryMachineBall.cs" />
     <Compile Include="Assets\AOT\Scripts\PatchLogic\FsmNode\FsmCreateDownloader.cs" />
     <Compile Include="Assets\AOT\Scripts\PatchLogic\FsmNode\FsmClearCacheBundle.cs" />
     <Compile Include="Assets\AOT\Scripts\PatchLogic\FsmNode\FsmUpdatePackageManifest.cs" />
-    <Compile Include="Assets\MarbleLotteryMachine\MarbleLotteryMachineFinalArea.cs" />
     <Compile Include="Assets\AOT\Scripts\PatchLogic\FsmNode\FsmStartGame.cs" />
     <Compile Include="Assets\AOT\Scripts\Boot.cs" />
     <Compile Include="Assets\AOT\Scripts\GameManager.cs" />
     <Compile Include="Assets\AOT\Scripts\PatchLogic\FsmNode\FsmRequestPackageVersion.cs" />
-    <Compile Include="Assets\MarbleLotteryMachine\MarbleLotteryMachine.Path.cs" />
-    <Compile Include="Assets\MarbleLotteryMachine\CSLList.cs" />
-    <Compile Include="Assets\MarbleLotteryMachine\MarbleLotteryMachine.cs" />
-    <Compile Include="Assets\MarbleLotteryMachine\MarbleLotteryMachine.UI.cs" />
     <Compile Include="Assets\AOT\Scripts\PatchLogic\FsmNode\FsmInitializePackage.cs" />
     <Compile Include="Assets\AOT\Scripts\PatchLogic\FsmNode\FsmDownloadPackageFiles.cs" />
-    <Compile Include="Assets\MarbleLotteryMachine\CSLuaBehaviour.cs" />
     <Compile Include="Assets\AOT\Scripts\EventDefine\BattleEventDefine.cs" />
-    <None Include="Assets\MarbleLotteryMachine\MarbleLotteryPaths.json" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.62f3c1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

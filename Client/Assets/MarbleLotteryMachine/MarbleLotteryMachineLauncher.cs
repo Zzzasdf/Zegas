@@ -1,12 +1,13 @@
 using UnityEngine;
+using TKLua;
 
-/// <summary>
-/// 弹珠抽奖机 -- 发射器组件
-/// </summary>
-public class MarbleLotteryMachineLauncher : MonoBehaviour
+[CSLStub.Out("Activity/Marble")]
+public class MarbleLotteryMachineLauncher : CSLuaBehaviour
 {
-    [SerializeField] private RectTransform launchPos;
-    
-    /// 发射位置
-    public RectTransform LaunchPos => launchPos;
+    [SerializeField] [Bind("launchPos")] private RectTransform launchPos;
+
+    public RectTransform LaunchPos
+    {
+        get { return this.launchPos; }
+    }
 }

@@ -1,101 +1,159 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using LuaFramework;
+using TKLua;
 
-public class MarbleLotteryMachineObstacle : MonoBehaviour
+[CSLStub.Out("Activity/Marble")]
+public class MarbleLotteryMachineObstacle : CSLuaBehaviour
 {
     [Header("碰撞区域")]
-    [SerializeField] private RectTransform collisionArea;
+    [SerializeField] [Bind("collisionArea")] private RectTransform collisionArea;
 
     [Header("碰撞效果参数")]
-    [SerializeField] private Color hitColor = Color.red;
-    [SerializeField] private float flashDuration = 0.2f;
-    [SerializeField] private float scalePulse = 1.2f;
+    private Color hitColor = new Color(1f, 0f, 0f, 1f);
+    private float flashDuration = 0.2f;
+    private float scalePulse = 1.2f;
 
-    private Image targetImage;
-    private Color originalColor;
-    private Vector3 originalScale;
+    private Image targetImage = null;
+    private Color originalColor = new Color(1f, 1f, 1f, 1f);
+    private Vector3 originalScale = new Vector3(1f, 1f, 1f);
 
-    /// <summary>碰撞检测区域（供外部访问）</summary>
-    public RectTransform CollisionArea => collisionArea;
+    private bool isPlayingEffect = false;
+    private Color effectStartColor = new Color(1f, 1f, 1f, 1f);
+    private Vector3 effectStartScale = new Vector3(1f, 1f, 1f);
+    private Vector3 effectTargetScale = new Vector3(1f, 1f, 1f);
 
-    /// <summary>设置碰撞区域（运行时调用）</summary>
-    public void SetCollisionArea(RectTransform rect)
+    private enum EffectPhase { Color, ScalePulse, ScaleReturn, Done }
+    private EffectPhase currentPhase = EffectPhase.Done;
+    private float phaseStartTime = 0f;
+
+    public RectTransform CollisionArea
     {
-        collisionArea = rect;
+        get { return this.collisionArea; }
+    }
+    public void SetCollisionArea(RectTransform rect) { this.collisionArea = rect; }
+
+    private Vector3 Vector3Lerp(Vector3 a, Vector3 b, float t)
+    {
+        return new Vector3(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t, a.z + (b.z - a.z) * t);
     }
 
-    void Start()
+    private void Start()
     {
-        // 尝试从 collisionArea 获取 Image，若没有则从自身获取
-        if (collisionArea != null)
+        if (this.collisionArea != null)
         {
-            targetImage = collisionArea.GetComponent<Image>();
-            if (targetImage == null)
-                targetImage = GetComponent<Image>();
+            this.targetImage = this.collisionArea.gameObject.GetComponent<Image>();
+        }
+        if (this.targetImage == null)
+        {
+            this.targetImage = this.gameObject.GetComponent<Image>();
+        }
+        if (this.targetImage != null)
+        {
+            this.originalColor = new Color(this.targetImage.color.r, this.targetImage.color.g, this.targetImage.color.b, this.targetImage.color.a);
         }
         else
         {
-            targetImage = GetComponent<Image>();
+            GLog.Debug("MarbleLotteryMachineObstacle::Start", this.gameObject.name + " 无 Image 组件");
         }
 
-        if (targetImage != null)
-            originalColor = targetImage.color;
-        else
-            Debug.LogWarning($"{name} 无 Image 组件，无法播放颜色效果");
-
-        // 记录原始缩放（用于脉冲）
-        if (collisionArea != null)
-            originalScale = collisionArea.localScale;
-        else
-            originalScale = transform.localScale;
+        Transform targetTransform = this.collisionArea;
+        if (targetTransform != null)
+        {
+            this.originalScale = new Vector3(targetTransform.localScale.x, targetTransform.localScale.y, targetTransform.localScale.z);
+        }
     }
 
-    /// <summary>被小球撞击时调用</summary>
+    private void Update()
+    {
+        if (!this.isPlayingEffect) return;
+
+        float elapsed = Time.time - this.phaseStartTime;
+        Transform targetTransform = this.collisionArea;
+        if (targetTransform == null) return;
+
+        if (this.currentPhase == EffectPhase.Color)
+        {
+            float t = Mathf.Clamp01(elapsed / this.flashDuration);
+            float eased = 1f - Mathf.Pow(1f - t, 2f);
+            if (this.targetImage != null)
+            {
+                this.targetImage.color = Color.Lerp(this.effectStartColor, this.originalColor, eased);
+            }
+            if (t >= 1f)
+            {
+                if (this.targetImage != null)
+                {
+                    this.targetImage.color = new Color(this.originalColor.r, this.originalColor.g, this.originalColor.b, this.originalColor.a);
+                }
+                this.currentPhase = EffectPhase.ScalePulse;
+                this.phaseStartTime = Time.time;
+                this.effectStartScale = new Vector3(targetTransform.localScale.x, targetTransform.localScale.y, targetTransform.localScale.z);
+                this.effectTargetScale = new Vector3(this.originalScale.x * this.scalePulse, this.originalScale.y * this.scalePulse, this.originalScale.z * this.scalePulse);
+                targetTransform.localScale = new Vector3(this.effectTargetScale.x, this.effectTargetScale.y, this.effectTargetScale.z);
+            }
+        }
+        else if (this.currentPhase == EffectPhase.ScalePulse)
+        {
+            if (elapsed >= this.flashDuration * 0.5f)
+            {
+                this.currentPhase = EffectPhase.ScaleReturn;
+                this.phaseStartTime = Time.time;
+                this.effectStartScale = new Vector3(targetTransform.localScale.x, targetTransform.localScale.y, targetTransform.localScale.z);
+                this.effectTargetScale = new Vector3(this.originalScale.x, this.originalScale.y, this.originalScale.z);
+            }
+        }
+        else if (this.currentPhase == EffectPhase.ScaleReturn)
+        {
+            float t = Mathf.Clamp01(elapsed / (this.flashDuration * 0.5f));
+            Vector3 newScale = this.Vector3Lerp(this.effectStartScale, this.effectTargetScale, t);
+            targetTransform.localScale = new Vector3(newScale.x, newScale.y, newScale.z);
+            if (t >= 1f)
+            {
+                targetTransform.localScale = new Vector3(this.originalScale.x, this.originalScale.y, this.originalScale.z);
+                this.isPlayingEffect = false;
+            }
+        }
+        else
+        {
+            this.isPlayingEffect = false;
+        }
+    }
+
     public void Hit()
     {
-        Debug.Log($"✅ {gameObject.name} 被击中！");
-        PlayEffect();
+        GLog.Debug("MarbleLotteryMachineObstacle::Hit", "✅ " + this.gameObject.name + " 被击中！");
+        this.PlayEffect();
     }
 
-    /// <summary>播放撞击效果（闪烁 + 脉冲）</summary>
     private void PlayEffect()
     {
-        StopAllCoroutines();
-        StartCoroutine(EffectCoroutine());
-    }
-
-    private IEnumerator EffectCoroutine()
-    {
-        // ---- 1. 颜色闪烁 ----
-        if (targetImage != null)
+        this.isPlayingEffect = false;
+        if (this.targetImage != null)
         {
-            targetImage.color = hitColor;
-            float elapsed = 0f;
-            while (elapsed < flashDuration)
-            {
-                elapsed += Time.deltaTime;
-                float t = elapsed / flashDuration;
-                float easedT = 1f - Mathf.Pow(1f - t, 2f);
-                targetImage.color = Color.Lerp(hitColor, originalColor, easedT);
-                yield return null;
-            }
-            targetImage.color = originalColor;
+            this.targetImage.color = new Color(this.originalColor.r, this.originalColor.g, this.originalColor.b, this.originalColor.a);
         }
 
-        // ---- 2. 缩放脉冲 ----
-        Transform targetTransform = collisionArea != null ? collisionArea : transform;
-        targetTransform.localScale = originalScale * scalePulse;
-        yield return new WaitForSeconds(flashDuration * 0.5f);
-        float elapsed2 = 0f;
-        Vector3 startScale = targetTransform.localScale;
-        while (elapsed2 < flashDuration * 0.5f)
+        Transform targetTransform = this.collisionArea;
+        if (targetTransform == null) return;
+        targetTransform.localScale = new Vector3(this.originalScale.x, this.originalScale.y, this.originalScale.z);
+
+        if (this.targetImage != null)
         {
-            elapsed2 += Time.deltaTime;
-            float t = elapsed2 / (flashDuration * 0.5f);
-            targetTransform.localScale = Vector3.Lerp(startScale, originalScale, t);
-            yield return null;
+            this.targetImage.color = new Color(this.hitColor.r, this.hitColor.g, this.hitColor.b, this.hitColor.a);
+            this.effectStartColor = new Color(this.hitColor.r, this.hitColor.g, this.hitColor.b, this.hitColor.a);
+            this.currentPhase = EffectPhase.Color;
+            this.phaseStartTime = Time.time;
+            this.isPlayingEffect = true;
         }
-        targetTransform.localScale = originalScale;
+        else
+        {
+            this.currentPhase = EffectPhase.ScalePulse;
+            this.phaseStartTime = Time.time;
+            this.effectStartScale = new Vector3(targetTransform.localScale.x, targetTransform.localScale.y, targetTransform.localScale.z);
+            this.effectTargetScale = new Vector3(this.originalScale.x * this.scalePulse, this.originalScale.y * this.scalePulse, this.originalScale.z * this.scalePulse);
+            targetTransform.localScale = new Vector3(this.effectTargetScale.x, this.effectTargetScale.y, this.effectTargetScale.z);
+            this.isPlayingEffect = true;
+        }
     }
 }

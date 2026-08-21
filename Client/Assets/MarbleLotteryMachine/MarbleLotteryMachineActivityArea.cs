@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
+using TKLua;
 
-/// <summary>
-/// 弹珠抽奖机 -- 活动区域组件
-/// </summary>
-public class MarbleLotteryMachineActivityArea: MonoBehaviour
+[CSLStub.Out("Activity/Marble")]
+public class MarbleLotteryMachineActivityArea : CSLuaBehaviour
 {
-    [SerializeField] private RectTransform activityArea;
+    [SerializeField] [Bind("activityArea")] private RectTransform activityArea;
 
-    /// 活动检测区域
-    public RectTransform ActivityArea => activityArea;
+    public RectTransform ActivityArea
+    {
+        get { return this.activityArea; }
+    }
 }

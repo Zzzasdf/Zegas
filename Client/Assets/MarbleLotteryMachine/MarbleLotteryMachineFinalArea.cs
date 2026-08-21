@@ -1,74 +1,72 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using LuaFramework;
+using TKLua;
 
-/// <summary>
-/// 弹珠抽奖机 -- 目标区域组件（仅颜色反馈）
-/// </summary>
-public class MarbleLotteryMachineFinalArea : MonoBehaviour
+[CSLStub.Out("Activity/Marble")]
+public class MarbleLotteryMachineFinalArea : CSLuaBehaviour
 {
-    [SerializeField] private RectTransform collisionArea;
+    [SerializeField] [Bind("collisionArea")] private RectTransform collisionArea;
 
     [Header("到达效果参数")]
-    [SerializeField] private Color reachColor = Color.green;   // 到达时的目标颜色
-    [SerializeField] private float flashDuration = 0.3f;       // 颜色过渡时长
+    private Color reachColor = new Color(0f, 1f, 0f, 1f);
+    private float flashDuration = 0.3f;
 
-    private Image targetImage;
-    private Color originalColor;
+    private Image targetImage = null;
+    private Color originalColor = new Color(1f, 1f, 1f, 1f);
 
-    public RectTransform CollisionArea => collisionArea;
+    private bool isPlaying = false;
+    private float effectStartTime = 0f;
+    private Color effectStartColor = new Color(1f, 1f, 1f, 1f);
 
-    void Start()
+    public RectTransform CollisionArea { get { return this.collisionArea; } }
+
+    private void Start()
     {
-        // 优先从 collisionArea 获取 Image，否则从自身获取
-        if (collisionArea != null)
+        if (this.collisionArea != null)
         {
-            targetImage = collisionArea.GetComponent<Image>();
-            if (targetImage == null)
-                targetImage = GetComponent<Image>();
+            this.targetImage = this.collisionArea.gameObject.GetComponent<Image>();
+        }
+        if (this.targetImage == null)
+        {
+            this.targetImage = this.gameObject.GetComponent<Image>();
+        }
+        if (this.targetImage != null)
+        {
+            this.originalColor = new Color(this.targetImage.color.r, this.targetImage.color.g, this.targetImage.color.b, this.targetImage.color.a);
         }
         else
         {
-            targetImage = GetComponent<Image>();
+            GLog.Debug("MarbleLotteryMachineFinalArea::Start", this.gameObject.name + " 无 Image 组件");
         }
-
-        if (targetImage != null)
-            originalColor = targetImage.color;
-        else
-            Debug.LogWarning($"{name} 无 Image 组件，无法播放颜色效果");
     }
 
-    /// <summary>
-    /// 外部调用，表示小球到达目标区域
-    /// </summary>
+    private void Update()
+    {
+        if (!this.isPlaying || this.targetImage == null) return;
+        float elapsed = Time.time - this.effectStartTime;
+        float t = Mathf.Clamp01(elapsed / this.flashDuration);
+        float eased = 1f - Mathf.Pow(1f - t, 2f);
+        this.targetImage.color = Color.Lerp(this.effectStartColor, this.originalColor, eased);
+        if (t >= 1f)
+        {
+            this.targetImage.color = new Color(this.originalColor.r, this.originalColor.g, this.originalColor.b, this.originalColor.a);
+            this.isPlaying = false;
+        }
+    }
+
     public void Reach()
     {
-        Debug.Log($"✅ 目标区域 {gameObject.name} 到达！");
-        PlayEffect();
+        GLog.Debug("MarbleLotteryMachineFinalArea::Reach", "✅ 目标区域 " + this.gameObject.name + " 到达！");
+        this.PlayEffect();
     }
 
     private void PlayEffect()
     {
-        StopAllCoroutines();
-        StartCoroutine(EffectCoroutine());
-    }
-
-    private IEnumerator EffectCoroutine()
-    {
-        if (targetImage == null) yield break;
-
-        // 瞬间变为目标色，然后平滑过渡回原色
-        targetImage.color = reachColor;
-        float elapsed = 0f;
-        while (elapsed < flashDuration)
-        {
-            elapsed += Time.deltaTime;
-            float t = elapsed / flashDuration;
-            // 缓出效果，让颜色变化更自然
-            float eased = 1f - Mathf.Pow(1f - t, 2f);
-            targetImage.color = Color.Lerp(reachColor, originalColor, eased);
-            yield return null;
-        }
-        targetImage.color = originalColor;
+        if (this.targetImage == null) return;
+        this.targetImage.color = new Color(this.reachColor.r, this.reachColor.g, this.reachColor.b, this.reachColor.a);
+        this.effectStartColor = new Color(this.reachColor.r, this.reachColor.g, this.reachColor.b, this.reachColor.a);
+        this.effectStartTime = Time.time;
+        this.isPlaying = true;
     }
 }

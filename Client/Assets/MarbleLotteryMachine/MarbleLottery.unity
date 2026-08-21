@@ -312,9 +312,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collisionArea: {fileID: 295962355}
-  hitColor: {r: 1, g: 0, b: 0, a: 1}
-  flashDuration: 0.2
-  scalePulse: 1.2
 --- !u!114 &194269504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -584,8 +581,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collisionArea: {fileID: 2040584222}
-  reachColor: {r: 0, g: 1, b: 0, a: 1}
-  flashDuration: 0.3
 --- !u!114 &705043298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -673,7 +668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18ba3510578815b44a4fe488c19f4853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  marbleLotteryPaths: {fileID: 4900000, guid: 83c734f41e84d4e48875b4b090a7ea48, type: 3}
+  marbleLotteryPaths: {fileID: 4900000, guid: 681317dbfba9c1e45a58b5b3e458eeb8, type: 3}
   ballTemplate: {fileID: 1850548577}
   obstacleTemplate: {fileID: 194269503}
   finalAreaTemplate: {fileID: 705043297}
@@ -682,12 +677,6 @@ MonoBehaviour:
   obstacleContainer: {fileID: 7321646}
   finalAreaContainer: {fileID: 1147626483}
   ballContainer: {fileID: 278915918}
-  launchBtn: {fileID: 0}
-  resetBtn: {fileID: 0}
-  regenerateBtn: {fileID: 0}
-  generatePathBtn: {fileID: 0}
-  directLaunchBtn: {fileID: 0}
-  infoText: {fileID: 0}
   gravity: 600
   bounceFactor: 0.6
   initialSpeed: 400
@@ -698,6 +687,11 @@ MonoBehaviour:
   blockHeight: 60
   blockCount: 8
   trueEndColor: {r: 0, g: 1, b: 0, a: 1}
+  recycleDelay: 0
+  launchInterval: 0.5
+  rotateSpeed: 180
+  pathSamplingDistance: 12
+  bezierSegments: 8
   trueEndIndex: -1
   startPoint: {x: 0, y: 0}
   endPoint: {x: 0, y: 0}
@@ -712,9 +706,17 @@ MonoBehaviour:
   gameContainer: {fileID: 0}
   mainCanvas: {fileID: 0}
   pathLine: {fileID: 0}
-  collisionCounter: 0
   ballCounter: 0
   pathGenAttempts: 0
+  savedPaths: []
+  launchBtn: {fileID: 0}
+  resetBtn: {fileID: 0}
+  regenerateBtn: {fileID: 0}
+  generatePathBtn: {fileID: 0}
+  infoText: {fileID: 0}
+  runStatusText: {fileID: 0}
+  saveBtn: {fileID: 0}
+  savePersistentBtn: {fileID: 0}
   selectedSlot: -1
 --- !u!1 &976715707
 GameObject:
@@ -1158,10 +1160,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collisionArea: {fileID: 1946878051}
-  hitFlashDuration: 0.15
-  reachFlashInterval: 0.1
-  reachFlashCount: 4
-  reachColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &1850548578
 MonoBehaviour:
   m_ObjectHideFlags: 0

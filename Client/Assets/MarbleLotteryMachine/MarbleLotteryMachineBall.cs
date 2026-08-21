@@ -1,102 +1,136 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;          // 用于 Image
-using System.Collections;
+using UnityEngine.UI;
+using TKLua;
+using LuaFramework;
 
-/// <summary>
-/// 弹珠抽奖机 -- 小球组件（支持 UI Image 和 3D Renderer）
-/// </summary>
-public class MarbleLotteryMachineBall : MonoBehaviour
+[CSLStub.Out("Activity/Marble")]
+public class MarbleLotteryMachineBall : CSLuaBehaviour
 {
-    [SerializeField] private RectTransform collisionArea;
-
-    public RectTransform CollisionArea => collisionArea;
+    [SerializeField] [Bind("collisionArea")] private RectTransform collisionArea;
+    public RectTransform CollisionArea
+    {
+        get { return this.collisionArea; }
+    }
 
     [Header("颜色反馈参数")]
-    [SerializeField] private float hitFlashDuration = 0.15f;
-    [SerializeField] private float reachFlashInterval = 0.1f;
-    [SerializeField] private int reachFlashCount = 4;
-    [SerializeField] private Color reachColor = Color.green;   // 到达目标区域的颜色
+    private float hitFlashDuration = 0.15f;
+    private float reachFlashInterval = 0.1f;
+    private int reachFlashCount = 4;
+    private Color reachColor = new Color(0f, 1f, 0f, 1f);
 
-    // 缓存组件
-    private Image image;
-    private Renderer renderer;
-    private Color originalColor;
-    private bool isUI;      // 标记是否为 UI
+    private Image image = null;
+    private Renderer renderer = null;
+    private Color originalColor = new Color(1f, 1f, 1f, 1f);
+    private bool isUI = false;
+
+    private enum EffectType { None, Hit, Reach }
+    private EffectType currentEffect = EffectType.None;
+    private int flashIndex = 0;
+    private float effectStartTime = 0f;
+    private float nextFlashTime = 0f;
 
     private void Awake()
     {
-        // 尝试获取 Image 或 Renderer
-        image = GetComponent<Image>();
-        renderer = GetComponent<Renderer>();
-        isUI = image != null;
-
-        if (!isUI && renderer == null)
+        this.image = this.gameObject.GetComponent<Image>();
+        this.renderer = this.gameObject.GetComponent<Renderer>();
+        if (this.image != null)
         {
-            Debug.LogWarning($"小球 {gameObject.name} 缺少 Image 或 Renderer 组件，颜色反馈无效。");
-            return;
+            this.isUI = true;
+            this.originalColor = new Color(this.image.color.r, this.image.color.g, this.image.color.b, this.image.color.a);
         }
-
-        // 保存初始颜色
-        originalColor = isUI ? image.color : renderer.material.color;
+        else
+        {
+            this.isUI = false;
+            if (this.renderer != null)
+            {
+                this.originalColor = new Color(this.renderer.material.color.r, this.renderer.material.color.g, this.renderer.material.color.b, this.renderer.material.color.a);
+            }
+            else
+            {
+                GLog.Debug("MarbleLotteryMachineBall::Awake", "小球 " + this.gameObject.name + " 缺少 Image 或 Renderer 组件，颜色反馈无效。");
+                return;
+            }
+        }
     }
 
-    /// <summary>
-    /// 撞击障碍物 —— 红色闪烁
-    /// </summary>
-    public void HitObstacle()
+    private void Update()
     {
-        Debug.Log($"{gameObject.name} 执行 HitObstacle()");
-        StopCoroutine(nameof(HitEffectCoroutine));
-        StartCoroutine(HitEffectCoroutine());
+        if (this.currentEffect == EffectType.None) return;
+
+        if (this.currentEffect == EffectType.Hit)
+        {
+            if (Time.time - this.effectStartTime >= this.hitFlashDuration)
+            {
+                this.SetColor(new Color(this.originalColor.r, this.originalColor.g, this.originalColor.b, this.originalColor.a));
+                this.currentEffect = EffectType.None;
+            }
+        }
+        else if (this.currentEffect == EffectType.Reach)
+        {
+            if (Time.time >= this.nextFlashTime)
+            {
+                if (this.flashIndex % 2 == 0)
+                {
+                    this.SetColor(new Color(this.reachColor.r, this.reachColor.g, this.reachColor.b, this.reachColor.a));
+                }
+                else
+                {
+                    this.SetColor(new Color(this.originalColor.r, this.originalColor.g, this.originalColor.b, this.originalColor.a));
+                }
+                this.flashIndex = this.flashIndex + 1;
+                this.nextFlashTime = Time.time + this.reachFlashInterval;
+                if (this.flashIndex >= this.reachFlashCount * 2)
+                {
+                    this.SetColor(new Color(this.reachColor.r, this.reachColor.g, this.reachColor.b, this.reachColor.a));
+                    this.currentEffect = EffectType.None;
+                }
+            }
+        }
     }
 
-    /// <summary>
-    /// 到达目标区域 —— 指定颜色闪烁庆祝
-    /// </summary>
-    public void ReachFinalArea()
-    {
-        Debug.Log($"{gameObject.name} 执行 ReachFinalArea()");
-        StopCoroutine(nameof(ReachEffectCoroutine));
-        StartCoroutine(ReachEffectCoroutine());
-    }
-
-    // ---------- 颜色设置工具 ----------
     private void SetColor(Color color)
     {
-        if (isUI)
-            image.color = color;
-        else
-            renderer.material.color = color;
-    }
-
-    // ---------- 协程 ----------
-    private IEnumerator HitEffectCoroutine()
-    {
-        if (!HasValidComponent()) yield break;
-
-        SetColor(Color.red);
-        yield return new WaitForSeconds(hitFlashDuration);
-        SetColor(originalColor);
-    }
-
-    private IEnumerator ReachEffectCoroutine()
-    {
-        if (!HasValidComponent()) yield break;
-
-        for (int i = 0; i < reachFlashCount; i++)
+        if (this.isUI)
         {
-            SetColor((i % 2 == 0) ? reachColor : originalColor);
-            yield return new WaitForSeconds(reachFlashInterval);
+            if (this.image != null)
+            {
+                this.image.color = new Color(color.r, color.g, color.b, color.a);
+            }
         }
-
-        // 最终停留在目标颜色
-        SetColor(reachColor);
+        else if (this.renderer != null)
+        {
+            this.renderer.material.color = new Color(color.r, color.g, color.b, color.a);
+        }
     }
 
-    private bool HasValidComponent()
+    public void HitObstacle()
     {
-        if (isUI || renderer != null) return true;
-        Debug.LogWarning($"{gameObject.name} 没有可用的颜色组件，跳过效果。");
-        return false;
+        GLog.Debug("MarbleLotteryMachineBall::HitObstacle", this.gameObject.name + " 执行 HitObstacle()");
+        if (this.currentEffect == EffectType.Reach)
+        {
+            this.SetColor(new Color(this.originalColor.r, this.originalColor.g, this.originalColor.b, this.originalColor.a));
+            this.currentEffect = EffectType.None;
+        }
+        if (this.currentEffect == EffectType.Hit)
+        {
+            this.effectStartTime = Time.time;
+            return;
+        }
+        this.currentEffect = EffectType.Hit;
+        this.effectStartTime = Time.time;
+        this.SetColor(new Color(1f, 0f, 0f, 1f));
+    }
+
+    public void ReachFinalArea()
+    {
+        GLog.Debug("MarbleLotteryMachineBall::ReachFinalArea", this.gameObject.name + " 执行 ReachFinalArea()");
+        this.currentEffect = EffectType.None;
+        this.SetColor(new Color(this.originalColor.r, this.originalColor.g, this.originalColor.b, this.originalColor.a));
+        this.currentEffect = EffectType.Reach;
+        this.flashIndex = 0;
+        this.nextFlashTime = Time.time;
+        this.SetColor(new Color(this.reachColor.r, this.reachColor.g, this.reachColor.b, this.reachColor.a));
+        this.flashIndex = this.flashIndex + 1;
+        this.nextFlashTime = Time.time + this.reachFlashInterval;
     }
 }
