@@ -6,6 +6,9 @@ using TKLua;
 using Random = UnityEngine.Random;
 using LuaFramework;
 
+/// <summary>
+/// 添加宏定义 MARBLE_DEV 可开启编辑功能
+/// </summary>
 [CSLStub.Out("Activity/Marble")]
 public partial class MarbleLotteryMachine : CSLuaBehaviour
 {
@@ -1903,6 +1906,32 @@ public partial class MarbleLotteryMachine : CSLuaBehaviour
         if (this.finalPath.Count > 0)
         {
             this.finalPath[0] = this.startPoint;
+        }
+
+        // ---- 压缩路径点数到 256 以内 ----
+        int maxPoints = 256;
+        if (this.finalPath.Count > maxPoints)
+        {
+            CSLList<Vector2> compressed = new CSLList<Vector2>();
+            float step = 1f / (maxPoints - 1);
+            int idx = 0;
+            while (idx < maxPoints)
+            {
+                float t = idx * step;
+                if (t > 1f)
+                {
+                    t = 1f;
+                }
+                Vector2 point = this.GetPointOnPath(this.finalPath, t);
+                compressed.Add(point);
+                idx = idx + 1;
+            }
+            // 确保终点精确匹配
+            if (compressed.Count > 0)
+            {
+                compressed[compressed.Count - 1] = this.finalPath[this.finalPath.Count - 1];
+            }
+            this.finalPath = compressed;
         }
     }
 

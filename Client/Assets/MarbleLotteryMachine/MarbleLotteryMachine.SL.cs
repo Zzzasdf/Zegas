@@ -44,6 +44,8 @@ public partial class MarbleLotteryMachine
         public List<TClientMarbleSlotData> vecSlots = new List<TClientMarbleSlotData>();
     }
     
+    protected string textAssetRelativePath = "MarbleLotteryMachine/MarbleLotteryPaths.bytes";
+    
     private void LoadPathsFromBytes()
     {
         if (this.marbleLotteryPaths == null)
@@ -188,37 +190,46 @@ public partial class MarbleLotteryMachine
         }
     }
     
-    
     public void ReplaceTextAsset()
     {
-#if UNITY_EDITOR
-        if (this.marbleLotteryPaths == null)
+        // 检查路径字段是否为空
+        if (string.IsNullOrEmpty(this.textAssetRelativePath))
         {
-            this.SetInfoText("错误：marbleLotteryPaths 未赋值");
+            this.SetInfoText("错误：请先在 Inspector 中设置 textAssetRelativePath 路径");
+            GLog.Debug("MarbleLotteryMachine::ReplaceTextAsset", "textAssetRelativePath 为空");
             return;
         }
+
+        // 构建完整路径
+        string assetPath = Application.dataPath + "/" + this.textAssetRelativePath;
+        // 注意：Application.dataPath 返回的是项目根目录下的 Assets 文件夹路径（例如 C:/MyProject/Assets）
+        // 因此拼接后得到例如 C:/MyProject/Assets/MarbleLotteryPaths.bytes
+
+        // 检查持久化文件是否存在
         string persistentPath = Application.persistentDataPath + "/MarbleLotteryPaths.bytes";
-        bool fileExists = System.IO.File.Exists(persistentPath);
-        if (!fileExists)
+        if (!System.IO.File.Exists(persistentPath))
         {
-            this.SetInfoText("持久化文件不存在，请先保存路径");
+            this.SetInfoText("错误：持久化文件不存在，请先保存路径");
+            GLog.Debug("MarbleLotteryMachine::ReplaceTextAsset", "持久化文件不存在: " + persistentPath);
             return;
         }
-        string assetPath = UnityEditor.AssetDatabase.GetAssetPath(this.marbleLotteryPaths);
-        if (string.IsNullOrEmpty(assetPath))
+
+        // 删除旧文件（如果存在）
+        if (System.IO.File.Exists(assetPath))
         {
-            this.SetInfoText("无法获取 TextAsset 的路径");
-            return;
+            System.IO.File.Delete(assetPath);
+            GLog.Debug("MarbleLotteryMachine::ReplaceTextAsset", "已删除旧文件: " + assetPath);
         }
-        string json = System.IO.File.ReadAllText(persistentPath);
-        System.IO.File.WriteAllText(assetPath, json);
-        UnityEditor.AssetDatabase.Refresh();
-        this.marbleLotteryPaths = UnityEditor.AssetDatabase.LoadAssetAtPath<TextAsset>(assetPath);
-        this.LoadPathsFromBytes();
-        this.SetInfoText("已成功替换 TextAsset 并重新加载");
-        GLog.Debug("MarbleLotteryMachine::ReplaceTextAsset", "Replaced TextAsset at: " + assetPath);
-#else
-        this.SetInfoText("此功能仅在 Unity Editor 中可用");
-#endif
+
+        // 复制新文件
+        System.IO.File.Copy(persistentPath, assetPath);
+        GLog.Debug("MarbleLotteryMachine::ReplaceTextAsset", "已复制文件: " + persistentPath + " -> " + assetPath);
+
+        // 由于没有 AssetDatabase.Refresh，需要提示用户手动刷新
+        this.SetInfoText("文件已替换，但需要手动刷新资源（重启 Unity 或点击 Assets > Refresh）才能生效");
+        GLog.Debug("MarbleLotteryMachine::ReplaceTextAsset", "操作完成，请手动刷新资源");
+
+        // 注意：当前引用的 marbleLotteryPaths 可能仍然指向旧文件，需要重新赋值或重新加载场景
+        // 建议重新加载场景或重启 Unity 来让 TextAsset 引用生效
     }
 }
