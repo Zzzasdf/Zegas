@@ -327,7 +327,7 @@ public partial class MarbleLotteryMachine : CSLuaBehaviour
         {
             Run(new CSLList<int>()
             {
-                1
+                0
             }, null);
         }
         this.UpdateBalls();
@@ -565,6 +565,21 @@ public partial class MarbleLotteryMachine : CSLuaBehaviour
             return;
         }
 
+        // 更新 startPoint 为当前发射器位置（用于动态生成路径）
+        bool launcherDestroyed = GameObjectUtils.IsDestroyed(this.launcher.gameObject);
+        bool launchPosDestroyed = GameObjectUtils.IsDestroyed(this.launcher.LaunchPos);
+        bool activityDestroyed = GameObjectUtils.IsDestroyed(this.activityArea.gameObject);
+        if (!launcherDestroyed && !launchPosDestroyed && !activityDestroyed)
+        {
+            Vector2 worldPos = this.launcher.LaunchPos.position;
+            this.startPoint = this.activityArea.ActivityArea.InverseTransformPoint(worldPos);
+            GLog.Debug("MarbleLotteryMachine::Run", "更新 startPoint 为 " + this.startPoint.ToString());
+        }
+        else
+        {
+            GLog.Debug("MarbleLotteryMachine::Run", "无法更新 startPoint，组件缺失");
+        }
+
         this.IsRunning = true;
         this.currentRunState = RunState.RotatingToTarget;
         this.runTargets = new CSLList<int>(targets);
@@ -693,6 +708,7 @@ public partial class MarbleLotteryMachine : CSLuaBehaviour
                 {
                     int idx = Random.Range(0, slot.Count);
                     SavedPathData data = slot[idx];
+                    // 直接使用保存的路径，不做任何偏移
                     path = new CSLList<Vector2>(data.finalPath);
                     collisionRecs = new CSLList<CollisionRecord>();
                     int r = 0;
@@ -702,24 +718,13 @@ public partial class MarbleLotteryMachine : CSLuaBehaviour
                         collisionRecs.Add(new CollisionRecord { progress = src.progress, obstacleIndex = src.obstacleIndex });
                         r = r + 1;
                     }
-                    if (path != null)
-                    {
-                        if (path.Count > 0)
-                        {
-                            Vector2 offset = this.startPoint - path[0];
-                            int j = 0;
-                            while (j < path.Count)
-                            {
-                                path[j] = new Vector2(path[j].x + offset.x, path[j].y + offset.y);
-                                j = j + 1;
-                            }
-                        }
-                    }
                     this.RemapCollisionRecords(collisionRecs);
+                    GLog.Debug("MarbleLotteryMachine::SetupNextTarget", "加载保存路径，起点=" + path[0].ToString());
                 }
             }
         }
 
+        // 如果没有加载到路径（或路径无效），则动态生成
         if (path == null)
         {
             PathResult result = this.GeneratePathForTarget(target);
@@ -764,6 +769,7 @@ public partial class MarbleLotteryMachine : CSLuaBehaviour
             return;
         }
 
+        // 验证路径点有效性
         int k = 0;
         bool hasInvalid = false;
         while (k < path.Count)
@@ -795,6 +801,7 @@ public partial class MarbleLotteryMachine : CSLuaBehaviour
         this.currentPathForLaunch = path;
         this.currentCollisionRecordsForLaunch = collisionRecs;
 
+        // 设置发射器旋转（基于路径方向）
         bool launcherDestroyed = GameObjectUtils.IsDestroyed(this.launcher.gameObject);
         if (launcherDestroyed)
         {

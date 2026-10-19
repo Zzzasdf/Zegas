@@ -851,7 +851,7 @@ PlayerSettings:
     PS5: DOTWEEN
     QNX: DOTWEEN
     Stadia: DOTWEEN
-    Standalone: DOTWEEN;POOLED_EXCEPTION
+    Standalone: DOTWEEN;POOLED_EXCEPTION;MARBLE_DEV
     VisionOS: DOTWEEN
     WebGL: DOTWEEN
     Windows Store Apps: DOTWEEN
